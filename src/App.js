@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import SearchBar from "./Components/SearchBar";
+import ProfileCard from "./Components/ProfileCard";
+import { useEffect, useContext } from "react";
+import AddBook from "./Components/AddBook";
+import BookContext from "./context/BookContext";
 
 function App() {
+  const {fetchBooks, handleOnSubmit} = useContext(BookContext);
+
+  useEffect(() => {
+    fetchBooks();
+  }, [fetchBooks]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="searchBar">
+        <SearchBar onSubmit={handleOnSubmit} />
+      </div>
+      <div className="app">
+        <ProfileCard  />
+        <AddBook  />
+      </div>
+    </>
   );
 }
 
